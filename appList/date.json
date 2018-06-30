@@ -1,0 +1,13 @@
+[
+  {"events":["carrot","exercise","ceafa"],"squirrel":true},
+  {"events":["bread","pudding","brushed teeth","weekend","touched tree"],"squirrel":false},
+  {"events":["carrot","nachos","brushed teeth","cycling","weekend"],"squirrel":false},
+  {"events":["brussel sprouts","ice cream","brushed teeth","computer","weekend"],"squirrel":false},
+  {"events":["potatoes","candy","brushed teeth","exercise","weekend","dentist"],"squirrel":false},
+  {"events":["brussel sprouts","pudding","brushed teeth","running","weekend"],"squirrel":false},
+  {"events":["pizza","brushed teeth","computer","work","touched tree"],"squirrel":false},
+  {"events":["bread","beer","brushed teeth","cycling","work"],"squirrel":false},
+  {"events":["cauliflower","brushed teeth","work"],"squirrel":false},
+  {"events":["pizza","brushed teeth","cycling","work"],"squirrel":false}
+
+]
