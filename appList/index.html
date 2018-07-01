@@ -9,20 +9,21 @@
     <!-- <script src="buton.js"></script> -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="cerereDB()">
 
     <div class="content-div">
+
         <div class="adaugare">
 
             <input type="text" placeholder="mancare" id="input-mancare">
             
             <div>
-                    <input type="radio" id="fals" name="gaze" checked />
+                    <input type="radio" id="fals" name="gaze" onclick="squirBool(this,event)"/>
                     <label for="fals">Fals</label>
             </div>
             
                 <div>
-                    <input type="radio" id="adev" name="gaze" />
+                    <input type="radio" id="adev" name="gaze" onclick="squirBool(this,event)"/>
                     <label for="adev">Adevarat</label>
                 </div>
 
@@ -33,10 +34,26 @@
         <div class="container-alimente">
 
         <div class="container-total">
+
+         <div class="container-sortat-alimente">
+
             <h2>Toate alimentele</h2>
             <div class="alimente">
                 
             </div>
+         </div>
+
+         <div class="container-sortat-indice">
+            <h2>>0.3</h2>
+            <div class="sortare-indice-peste03">
+
+            </div>
+            <h2>>0.5</h2>
+            <div class="sortare-indice-peste05">
+
+            </div>
+         </div>
+
         </div>
 
         <div class="zile">
