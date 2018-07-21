@@ -91,7 +91,7 @@ class App extends React.Component{
 
 
     render(){
-        const {icon, dataOra, description,temperatura,temperaturaMin,temperaturaMax} = this.state;
+        const {nume,icon, dataOra, description,temperatura,temperaturaMin,temperaturaMax} = this.state;
         return(
 
             <div className="container">
@@ -99,7 +99,9 @@ class App extends React.Component{
                 <Form onSubmit={this.handleForm} onPrognoza={this.handlePrognoza} golirePrognoza={this.golirePrognoza} />
 
                 {/* logica este ca atat timp cat this.state.icon este false nu va trece la urmatoarea comparatie */}
-                {this.state.icon !== '' && <ZiuaActuala icon={icon} 
+                {this.state.icon !== '' && <ZiuaActuala 
+                nume={nume}
+                icon={icon} 
                 dataOra={dataOra} 
                 description={description} 
                 temperatura={temperatura} 
