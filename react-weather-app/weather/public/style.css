@@ -1,0 +1,58 @@
+
+* {
+    box-sizing: border-box;
+}
+html{
+
+    font-size:16px;
+
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #efefef;
+}
+
+.container{
+
+    height:100vh;
+    transition: 0.3ms ease all;
+}
+
+/* FORM ========*/
+
+
+.form-container{
+    font-size: 1.2rem;
+    text-align:center;
+    width:60%;
+    margin:auto;
+}
+
+.form-container form input[type="text"]{
+    display: block;
+    margin:auto;
+    color: #222;
+    border:none;
+
+}
+
+.form-container form input[type="text"]:focus{
+    outline: none;
+}
+
+
+
+/* Lista cu prognoza ==== */
+
+
+.lista-vreme{
+
+    display:grid;
+    grid-gap: 15px 10px;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows:auto;
+    
+}
