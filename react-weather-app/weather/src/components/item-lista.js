@@ -19,7 +19,7 @@ import React from 'react';
                 <span id="description">{this.props.description}</span>
                 <span id="ora">{this.props.timp}</span>
                 <div id="temp">Temp{this.props.temp}</div>
-                <span id="tempMin">Min{this.props.tempMin}</span>
+                <span id="tempMin">Minn{this.props.tempMin}</span>
                 <span id="tempMax">Max{this.props.tempMax}</span>
                 </div>
 
