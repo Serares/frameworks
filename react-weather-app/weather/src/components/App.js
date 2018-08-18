@@ -55,12 +55,21 @@ class App extends React.Component{
        .then((data)=>{
 
            console.log(data.data);
-
+            
            var date = data.data;
+          
+           var dataCurenta = new Date();
+           var ziua = dataCurenta.getDate();
+           var luna = dataCurenta.getMonth()+1;
+           var anul = dataCurenta.getFullYear();
+           var ore = dataCurenta.getHours();
+           var minute = dataCurenta.getMinutes();
+            console.log(typeof luna);
 
            this.setState({
             nume: date['name'],
             icon: date.weather[0]['icon'],
+            dataOra: ziua + '-'+ (luna < 10 ?'0'+luna:luna) + '-' + anul + '/'+ore+':'+(minute<10? '0'+minute: minute),
             description: date.weather[0]['description'],
             temperatura: date.main['temp'],
             temperaturaMin: date.main['temp_min'],
