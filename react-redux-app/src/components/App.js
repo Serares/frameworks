@@ -1,11 +1,19 @@
 import React from 'react';
+import CharacterList from './CharacterList';
+import CharacterProfile from './CharacterProfile';
 
 
 const App = () => {
+    
     return(
-        <div className = 'container'>
+
+    <div className = 'container'>
+
     <div className = 'row'>
-        Hello World
+
+        <CharacterList />
+        <CharacterProfile />
+        
     </div>
     
     </div>
