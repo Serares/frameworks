@@ -42,10 +42,13 @@ module.exports = {
       new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery'
-      })
+      }),
+      new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {  // configuration for webpack-dev-server
       contentBase: './src/public',  //source of static assets
       port: 7700, // port to run dev-server
+      hot:true,
+      inline:true
   } 
 };

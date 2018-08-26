@@ -1,6 +1,28 @@
 
 $primary-color: #1ce;
 
+html{
+    margin:0;
+    padding:0;
+
+}
+
 body{
-    color: $primary-color;
+    padding:0;
+    margin:0;
+}
+
+.vremea-actuala{
+    background-color: darken($primary-color, 5%);
+}
+
+.prognoza {
+    .item-lista{
+        background-color: darken($primary-color, 20%);
+    }
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 15px;
+
 }
