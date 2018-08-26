@@ -1,11 +1,6 @@
 import '../style/app.scss';
+$('#item'); // <= just works
+jQuery('#item'); // <= just works
+// $ is automatically set to the exports of module "jquery"
 
-
-class TestClass{
-    constructor(){
-        var msg = 'Using es5'
-        console.log(msg);
-    }
-}
-
-var test = new TestClass();
+$('h1').css('color','#222');

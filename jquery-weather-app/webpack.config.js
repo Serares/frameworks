@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
+const webpack = require('webpack');
 
 module.exports = {
 
@@ -19,6 +20,8 @@ module.exports = {
             ]
           },
 
+          
+
         {
             test: /\.(sass|scss)$/,
             use: [{
@@ -35,6 +38,10 @@ module.exports = {
       new HtmlWebpackPlugin({
           template: __dirname + "/src/public/index.html",
           inject: 'body'
+      }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
       })
   ],
   devServer: {  // configuration for webpack-dev-server
