@@ -5,10 +5,13 @@ $(document).ready(function(){
     // functie ce ruleaza cerere de pe firebase si deseneaza datele in html
 
     function ajaxReq(){
+        
+        // afisare loading screen
+        $('.loading-screen').css('display','block');
 
         $.getJSON(`https://jquery-menu.firebaseio.com/.json`,function(data){
             
-
+            
             console.log(data);
 
             $.each(data, function(key,val){
@@ -31,10 +34,14 @@ $(document).ready(function(){
                 `);
             })
 
-
+            $('.loading-screen').hide();
         })
 
+        
+
     }
+
+
 
     $('#btn-admin').on('click',function(){
         window.location = 'static/admin.html';
