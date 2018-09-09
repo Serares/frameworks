@@ -11,22 +11,27 @@ $(document).ready(function(){
     var produs= {
         denumire:"",
         imagine:"",
-        ingrediente:""
+        ingrediente:"",
+        detalii:""
     }
 
     $('.btn-produs').on('click',function(){
         produs.denumire = $('#input-denumire').val();
         produs.imagine = $('#input-img').val();
         produs.ingrediente = $('#input-ingrediente').val();
+        produs.detalii = $('#input-detalii').val();
        
         $.post('https://jquery-menu.firebaseio.com/.json',JSON.stringify(produs),function(){
+
             console.log('Success trimis date');
             console.log(JSON.stringify(produs));
+
         })
 
         $('#input-denumire').val('');
         $('#input-img').val('');
         $('#input-ingrediente').val('');
+        $('#input-detalii').val('');
     })
 
 
