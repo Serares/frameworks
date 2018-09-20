@@ -1,0 +1,53 @@
+@charset "UTF-8";
+.titlu {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #707070;
+  font-size: 18px;
+  border: 1px solid black;
+  margin-bottom: 10px; }
+
+.table-header {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #707070;
+  font-size: 18px; }
+
+#buton-calculare {
+  font-size: 0.8rem;
+  display: block;
+  padding: 1.1em 2.2em;
+  margin: auto;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  color: #FFFFFF;
+  background-color: #4eb5f1;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+  outline: none; }
+  #buton-calculare:hover {
+    background-color: #4095c6;
+    cursor: pointer; }
+  @media all and (max-width: 30em) {
+    #buton-calculare  #buton-calculare {
+      display: block;
+      margin: 0.2em auto; } }
+
+.form-container {
+  padding: 5px; }
+
+.inputuri {
+  text-align: center; }
+  .inputuri input[type="number"] {
+    margin: 0 1.4rem 10px 5px;
+    border: none;
+    border-bottom: 1px solid #a3a3a3;
+    font-size: 21px;
+    width: 72px; }
+    .inputuri input[type="number"]:focus {
+      outline: none; }

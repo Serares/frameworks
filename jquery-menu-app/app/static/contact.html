@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        width: 50vw;
+        height: 400px;
+        background-color: grey;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/contact.css">
+    
+  </head>
+  <body>
+    <h3>Contact Page</h3>
+    <button id="btn-home">Home</button>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        
+    <!--The div element for the map -->
+    <div id="map"></div>
+            <script>
+            document.getElementById('btn-home').addEventListener('click',function(){
+                window.location.href = "/jquery-menu-app/app/index.html"
+            })
+            // Initialize and add the map
+     function initMap() {
+        // The location of Uluru
+        var uluru = {lat: 44.4380179, lng: 26.0699947};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 20, center: uluru});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: uluru, map: map});
+      }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8B9riagbOzBPGAZWS2wW-hrRCZ3MHBm4&callback=initMap">
+            </script>
+        
+
+  </body>
+</html>

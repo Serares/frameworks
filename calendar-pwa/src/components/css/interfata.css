@@ -1,0 +1,33 @@
+.html {
+  font-size: 16px; }
+
+.body {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: #bcbcbc; }
+
+.main-container {
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+  color: #bcbcbc;
+  padding-top: 30px;
+  width: 375px; }
+
+.overlayError {
+  height: 200px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  transition: 0.5s;
+  color: white;
+  text-align: center;
+  padding-top: 40px; }

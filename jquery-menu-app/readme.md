@@ -1,1 +1,1 @@
-jquery app
+{{jquery app}}

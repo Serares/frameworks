@@ -2,9 +2,11 @@ $(document).ready(function(){
     // routing pe pagina principala
     $('#home-btn').on('click',function(){
 
-        window.location.pathname = '/jquery-menu-app/app/index.html'
+        window.location.href = '/jquery-menu-app/app/index.html';
 
-    })
+    });
+
+    
 
 
     // leg un buton care face legatura cu ADD ;
