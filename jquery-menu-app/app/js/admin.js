@@ -39,9 +39,9 @@ $(document).ready(function(){
                     <img src="${imagine}" alt="imagine" />
                 </div>
                 <div class="continut-produs">
-                    <div class="titlu-produs"><span>${denumire}</span></div>
-                    <div class="ingrediente"><span>${ingrediente}</span></div>
-                    <div class="detalii"><span>${detalii}</span></div>
+                    <div class="titlu-produs"><div>Denumire: ${denumire}</div></div>
+                    <div class="ingrediente"><div>Ingrediente: ${ingrediente}</div></div>
+                    <div class="detalii"><div>Detalii: ${detalii}</div></div>
                 </div>
                 <div class="butoane-produs">
                             <div class="btn-stergere" data-id="${key}">Sterge</div>

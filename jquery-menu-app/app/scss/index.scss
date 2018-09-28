@@ -56,9 +56,10 @@ body{
     margin:0;
     font-size:16px;
     max-height: 100%;
-    overflow: hidden;
+    overflow: scroll;
     background-color:$background-colors;
 }
+
 
 // header:
 
@@ -75,6 +76,12 @@ header{
         border-bottom:1px solid black;
         color: #2c3e50;
     }
+}
+
+.content{
+
+    margin-top:5rem;
+
 }
 
 // butoane :
@@ -96,6 +103,7 @@ header{
 
 
 .input-search{
+
     padding:10px 0 10px 0;
     width:80%;
     display: inline-block;
@@ -141,7 +149,7 @@ header{
     grid-template-columns: 1fr 2fr 1fr;
     grid-column-gap: 0.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: lighten($background-colors,22%);
+    background-color: darken($background-colors,8%);
     border-radius:2px;
     
 
@@ -174,6 +182,12 @@ header{
 
 
 // input:
+
+.input-search{
+    >label{
+        margin-bottom:3rem;
+    }
+}
 
 .left {
     float: left;
@@ -232,4 +246,22 @@ header{
 
 @keyframes blinker {  
   50% { opacity: 0.0; }
+}
+
+
+
+@media all and (max-width:768px){
+
+    .lista-produse{
+        display:grid;
+        grid-row-gap: 0.5rem;
+        padding-top:3rem;
+        width:100%;
+        margin:auto;
+    }
+    .header-content{
+        width:100%;
+        box-sizing: border-box;
+        padding: 10px 10px;
+    }
 }

@@ -10,28 +10,111 @@ body{
 
     padding:0;
     margin:0;
-    
+    height:100vh;
+    overflow: hidden;
 }
 
-
+@mixin buttons($color){
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color: $color;
+    text-align:center;
+    transition: all 0.2s;
+    border:none;
+        &:hover{
+            background-color:#4095c6;
+            cursor: pointer;
+            }
+        
+        &:focus{
+            outline: none;
+        }
+            @media all and (max-width:30em){
+                 #btn-home{
+                display:block;
+                margin:0.2em auto;
+                }
+            }
+}
 
 .lista-produse{
     display:grid;
     grid-row-gap: 0.5rem;
+    padding-top:3rem;
+    width:50%;
+    margin:auto;
 }
 
 .produs{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-column-gap: 0.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    >div{
-        background-color: lighten($background-colors,2%);
-    }
+    background-color: darken($background-colors,8%);
+    border-radius:2px;
+    
 
     .imagine-produs img{
-        width: 4rem;
+        width: 5rem;
+        max-height: 4rem;
+        justify-self: end;
+    }
+
+    .imagine-produs{
+        justify-items: center;
+    }
+
+    .continut-produs{
+        .titlu-produs, .ingrediente, .detalii{
+            width:100%;
+            >div{
+                max-width:400px;
+                word-break: break-all;
+            }
+        } 
     }
 }
 
+// butoane :
 
+
+.btn-add{
+    @include buttons(#222);
+        }
+#home-btn{
+    @include buttons(#a5c5f7);
+}
+
+.btn-modificare{
+    @include buttons(#a5c5f7);
+    display:block;
+    min-width:3rem;
+    max-width:6rem;
+}
+
+.btn-stergere{
+    @include buttons(#a5c5f7);
+}
+
+
+
+
+@media all and (max-width:768px){
+
+    .lista-produse{
+        display:grid;
+        grid-row-gap: 0.5rem;
+        padding:4px 9px;
+        box-sizing: border-box;
+        width:100%;
+        margin:auto;
+    }
+
+}
