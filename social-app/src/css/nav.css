@@ -1,0 +1,11 @@
+.navbar {
+  width: 100%;
+  background-color: #eaeaea; }
+
+.basket {
+  height: 100%; }
+  .basket:hover {
+    cursor: pointer; }
+
+.navbar {
+  background-color: #496ba0; }

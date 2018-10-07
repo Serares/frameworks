@@ -1,0 +1,19 @@
+{
+    "users":[
+        {
+            "id":123,
+            "picture":"https://artofwalent.files.wordpress.com/2011/02/img_step4.jpg",
+            "name":"Rares",
+            "lastname":"Jianu"
+        }
+
+    
+    ],
+    "posts":[
+        {
+            "postId":321,
+            "userId":123,
+            "content":"Blablabla"
+        }
+    ]
+}
