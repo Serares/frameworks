@@ -1,10 +1,8 @@
 import React from 'react';
 
-
 import {Navigation as Navbar} from '../components/nav/navbar';
 import Posts from '../components/post/Posts';
 
-import axios from 'axios';
 
 class Home extends React.Component {
     constructor(){
@@ -19,24 +17,6 @@ class Home extends React.Component {
     }
 
 }
-
-
-    componentDidMount(){
-
-        
-        axios.get('https://react-store-40571.firebaseio.com/.json')
-        .then((resp) =>{
-            
-        })
-        
-        .catch(function(err){
-            console.log(err)
-        })
-
-        
-    }
-
-
 
 
     render(){

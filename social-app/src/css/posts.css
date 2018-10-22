@@ -1,0 +1,9 @@
+.posts-container {
+  display: grid;
+  justify-items: center;
+  grid-gap: 2em; }
+  .posts-container > div {
+    box-sizing: border-box;
+    background-color: #efefef;
+    width: 40%;
+    max-width: 200px; }

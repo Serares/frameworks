@@ -8,6 +8,7 @@ import axios from 'axios';
 
 
 class Posts extends React.Component {
+    
     constructor(){
         super()
         this.state = {
@@ -84,20 +85,24 @@ class Posts extends React.Component {
         var posts = this.state.posts;
         
         return (
-            <div className="posts-container">
+            <div className="posts-container-main">
             <CreatePost handleSubmit={this.submitPost} />
+            <div className="posts-container">
             {/* iterete through objects in reverse to show the latest post */}
             {Object.keys(posts).slice(0).reverse().map((pos,index)=>{
                 return(
-                    <Link to={`/posts/${pos}`} key={index}>
+                    
                     <div className="post-container" key={index} id={pos}>
+                    <Link to={`/posts/${pos}`} key={index}>
                     <Post contentPost={posts[pos].content} userImage={'https://artofwalent.files.wordpress.com/2011/02/img_step4.jpg'} ident={posts[pos].postId} key={index}/>
-                    </div>
                     </Link>
+                    </div>
+                    
                     )
             })}
                
             </div>
+        </div>
         )
     }
 

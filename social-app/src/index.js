@@ -5,7 +5,7 @@ import { createStore } from 'redux'
 
 // import pentru css
 
-import './css/nav.css';
+import './css/main.css';
 import './index.css';
 
 import App from './App';

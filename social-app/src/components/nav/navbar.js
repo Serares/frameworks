@@ -1,56 +1,40 @@
 import React from 'react';
 import Navbar from '../../../node_modules/react-bootstrap/lib/Navbar';
-import NavDropdown from '../../../node_modules/react-bootstrap/lib/NavDropdown';
-import MenuItem from '../../../node_modules/react-bootstrap/lib/MenuItem';
-import NavItem from '../../../node_modules/react-bootstrap/lib/NavItem';
-import Nav from '../../../node_modules/react-bootstrap/lib/Nav';
-import Basket from './Basket';
+import {Link} from 'react-router-dom';
 
-/**
- * App navigation
- * Folosesc react-bootstrap 
- * @param  {Object}   props
- * @param  {Object}   props.user         user object
- * @param  {Function} props.handleLogout logout action
- */
+
+
+const colorText = {
+    color: "#ffffff"
+}
+
 export const Navigation = (props) => {
     return(
-        <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#brand">Store</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1} href="#">
-              Link
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-              Link
-            </NavItem>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.3}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
-          <Nav pullRight>
-            <NavItem eventKey={1} href="#">
-              Sign In
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-                
-              Basket
-              
-            </NavItem>
-            <Basket />
+      <Navbar>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="#home" style={colorText}>Social</a>
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Navbar.Text style={colorText}>
+        {
+          props.authenticated ? 
+          <Navbar.Text><span>Hello:</span> <Navbar.Link href="#" style={colorText}>Default Name</Navbar.Link></Navbar.Text>
+          :
+          <span>Not signed in</span>
+        }
+          
+        </Navbar.Text>
 
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        {props.authenticated ? 
+        <Navbar.Text pullRight style={colorText}><Link to="/login"><button>Log out</button></Link></Navbar.Text>
+        :
+        <Navbar.Text pullRight style={{color:"#000"}}><Link to="/login"><button>Sign up or Log In</button></Link></Navbar.Text>
+        }
+        
+      </Navbar.Collapse>
+    </Navbar>
 );
 }
