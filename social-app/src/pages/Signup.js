@@ -62,7 +62,7 @@ class Signup extends React.Component {
         const name = this.state.name;
         const lastname = this.state.lastname; 
 
-        //this.props.signupHandler(emailS,passW);
+        this.props.signupHandler(emailS,passW);
 
         axios.post('https://react-store-40571.firebaseio.com/users.json',{
 
@@ -91,9 +91,7 @@ class Signup extends React.Component {
           })
     }
 
-    componentWillUnmount(){
-        
-    }
+    
 
    render(){ 
        
@@ -111,12 +109,14 @@ class Signup extends React.Component {
         <div className="signup-title">
         <h2>Sign up</h2>
         </div>
+        {/* this needs to be validated */}
         <form onSubmit={this.handleSubmit}>
             <div className="inputs-container">
             <input type="text" placeholder="Name" id="name" onChange={this.handleName} value={this.state.name}/>
             <input type="text" placeholder="Lastname" id="lastname" onChange={this.handleLastname} value={this.state.lastname} />
             <input type="email" placeholder="Email" id="email" onChange={this.handleEmail} value={this.state.email}/>
             <input type="password" placeholder="password" id="password" onChange={this.handlePassword} value={this.state.password} />
+            {/* make validation for the rePassword */}
             <input type="password" placeholder="Retype Password" id="rePassword"/>
             <input type="submit" value="Register" />
             <input type="checkbox" id="checked" /> <span>I accept all statements in <u>Terms of Service</u></span>

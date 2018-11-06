@@ -8,6 +8,7 @@ import ControlLabel from '../../node_modules/react-bootstrap/lib/ControlLabel';
 import imgPngFacebook from '../static/img/facebookpng.png';
 
 
+
 import {
     BrowserRouter as Router,
     Route,
@@ -34,31 +35,62 @@ const formContainer = {
 
         this.state={
 
-            authenticated: false,
+            redirect: false,
             email: "",
             password: "",
+
         }
 
         
     }
 
+    componentWillReceiveProps(){
+        console.log(this.props.authenticat);
+        this.setState({
+            redirect: this.props.authenticat
+        })
+    }
+
     //  log in handler
-    login = () =>{
+    
 
+    login = (email,password) => {
         const emailS = this.state.email;
         const passwordS = this.state.password;
 
-        this.props.loginHandler(emailS,passwordS)
-
+        console.table([{
+            email: email,
+            password: password
+        }])
+    
+        // see errors if not signed in or if there are wrong inputs values
+        signInWithEmailAndPassword(emailS,passwordS)
+        .then(()=>{
+          
+          this.setState({redirect:true})
+          
+        })
+        .catch(function(error){
+          var errorCode = error.code;
+          var errorMessage = error.message;
+            if(errorCode === 'auth/wrong-password'){
+              alert('Wrong password.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+        })
+    
+        // provider.onAuthStateChanged(user => {
+        //   if(user){
+        //   console.log(user); 
+        //   this.setState({authenticated:true})
+    
+          
+        // }else {console.log("not signed in")} })
+        // // adauga redirect catre home ;
     }
-    // sign up handler 
-    signup = () =>{
-        const emailS = this.state.email;
-        const passwordS = this.state.password;
-
-        this.props.signupHandler(emailS,passwordS)
-    }
-
+    
     // inputs values 
     handleEmailChange = (e) =>{
         this.setState({
@@ -74,6 +106,16 @@ const formContainer = {
 
     
     render() {
+        let { from } = this.props.location.state || { from: { pathname: "/" } };
+        let { redirect } = this.state;
+
+        if(redirect){
+
+            return (
+                <Redirect to="/home" />
+            )
+        }
+
         return (
             <div className="login">
                 <div className="welcome-container">
@@ -84,15 +126,15 @@ const formContainer = {
                 <div className="inputs-container">
                 <h3>Welcome!</h3>
                 <ControlLabel>Email</ControlLabel>{' '}
-                        <FormControl type="email" placeholder="Email" onChange={this.handleEmailChange}/>
+                        <FormControl type="email" placeholder="Email" onChange={this.handleEmailChange} value={this.state.email}/>
                 <ControlLabel>Password</ControlLabel>{' '}
-                        <FormControl type="password" placeholder="Password" onChange={this.handlePasswordChange}/>
+                        <FormControl type="password" placeholder="Password" onChange={this.handlePasswordChange} value={this.state.password}/>
                     
                 </div>
                 <div className="buttons-container">
                 
                     <Button bsSize="large" onClick={this.login} style={{marginRight:"20px"}}>
-                        <i className='log-in-txt' /> log in
+                       <i className='log-in-txt' /> log in
                     </Button>
                     
                     <Button  onClick={this.loginFacebook}><img src={imgPngFacebook} style={{width:"20px", height:"20px"}}/>Sign in with Facebook</Button>

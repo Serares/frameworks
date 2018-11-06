@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Home from './pages/Home';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"; 
+import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from "react-router-dom"; 
 import SinglePost from './pages/SinglePost';
 import NotFound from './pages/404';
 import Login from './pages/Login';
@@ -33,29 +33,9 @@ class  App extends React.Component{
   }
 
 
-  login = (email,password) => {
-        
-    console.table([{
-        email: email,
-        password: password
-    }])
+  
 
-    // see errors if not signed in or if there are wrong inputs values
-    signInWithEmailAndPassword(email,password)
-    .catch(function(error){
-      var errorCode = error.code;
-      var errorMessage = error.message;
-        if(errorCode === 'auth/wrong-password'){
-          alert('Wrong password.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-    })
 
-    provider.onAuthStateChanged(user => {if(user){console.log(user);}else {console.log("no signed in")} })
-    // adauga redirect catre home ;
-}
 
 signup = (email,password) =>{
     
@@ -69,6 +49,7 @@ signup = (email,password) =>{
 
 
   render(){
+    
     return (
       <div className="main-container">
   
@@ -80,9 +61,9 @@ signup = (email,password) =>{
 
         {/* <Route path="/" exact render={(props) => <Home {...props} isAuthed={this.state.authenticated}/>} /> */}
         <Route path="/signup" render={(props)=> <Signup {...props}  signupHandler={this.signup} />}/>
-        <Route path="/login" render={(props) => <Login {...props} loginHandler={this.login} />} />
+        <Route path="/login" render={(props) => <Login {...props} loginHandler={this.login} authenticat={this.state.authenticated} />} />
         <Route path="/posts/:postId" component={SinglePost} />
-        <PrivateRoute authed={this.state.authenticated} path="/" component={Home} />
+        <PrivateRoute authed={this.state.authenticated} path="/home" component={Home} />
         <Route component={NotFound} />
         
         </Switch>

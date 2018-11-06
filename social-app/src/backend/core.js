@@ -34,7 +34,7 @@ export function logUserOut() {
  * 
  */
 export function signInWithEmailAndPassword(email,pass) {
-    return firebase.auth().signInWithEmailAndPassword(email,pass);
+    return firebase.auth().signInWithEmailAndPassword(email,pass)
 }
 
 // create user 
@@ -67,7 +67,7 @@ export function loginWithFacebook() {
  * 
  */
 export function getFirebaseUser() {
-    return firebase.auth().onAuthStateChanged(user => {if(user){return user;}else {return "no signed in"} });
+    return firebase.auth().onAuthStateChanged(user=>{if(user){return user}});
 }
 
 /**
