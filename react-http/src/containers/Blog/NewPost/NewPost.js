@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
+
 
 import './NewPost.css';
 
@@ -8,7 +10,8 @@ class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Nelutu'
+        author: 'Nelutu',
+        submitted:false
     }
 
 
@@ -21,13 +24,22 @@ class NewPost extends Component {
 
         axios.post('https://jsonplaceholder.typicode.com/posts/',post)
         .then(response=>{
-            console.log(response)
+            console.log(response);
+            // poti sa foloseste history replace ca si Redirect si inlocuieste pagina ca sa nu poti sa dai back de la browser
+            this.props.history.push({pathname:'/posts'})
+            //this.setState({submitted:true})
         })
     }
 
     render () {
+        // conditional redirecting
+        // let redirect = null;
+        // if(this.state.submitted){
+        //     redirect = <Redirect to="/posts" />
+        // }
         return (
             <div className="NewPost">
+                {/* {redirect} */}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Route,NavLink} from 'react-router-dom';
+import {Route,NavLink, Switch, Redirect} from 'react-router-dom';
 
-import FullPost from './FullPost/FullPost';
+
 import NewPost from './NewPost/NewPost';
 import Posts from './Posts/Posts';
 import './Blog.css';
@@ -10,6 +10,9 @@ import './Blog.css';
 
 class Blog extends Component {
     
+    state={
+        auth:false
+    }
 
 
     render () {
@@ -21,13 +24,13 @@ class Blog extends Component {
                         <ul>
                             <li>
                                 <NavLink 
-                            to="/" 
-                            exact
+                            to="/posts" 
+                            // poti sa pui exact aici si o sa se intample style doar daca este /posts dar fara o sa functioneze si la /posts/:id
                             activeClassName="my-active"
                             activeStyle={{
-                                color:'#666',
+                                color:'#667',
                                 textDecoration:"underline"
-                            }}>Home</NavLink></li>
+                            }}>Posts</NavLink></li>
 
                             <li><NavLink to={{
                                 pathname:'/new-post',
@@ -41,9 +44,18 @@ class Blog extends Component {
 
                 {/* <Route path="/" exact render={()=><h1>Home</h1>} />
                 <Route path="/new-post" exact render={()=><h1>New Post</h1>} /> */}
-                <Route path="/" exact component={Posts} />
-                <Route path="/new-post" exact component={NewPost} />
-                <Route path="/:id" exact component={FullPost} />
+                
+                {/* switch ajuta sa faca render doar la un route */}
+                
+                <Switch>
+                    {/* guarded route */}
+                {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
+                <Route path="/posts" component={Posts} />
+                {/* not found page */}
+                <Route render={() =><h1>Not found</h1>} />
+                {/* poti sa foloseste redirect cu from doar in switch tag */}
+                {/* <Redirect from="/" to="/posts" /> */}
+                </Switch>
             </div>
         );
     }

@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 import './Posts.css';
 import Post from '../../../components/Post/Post';
-
+import FullPost from '../FullPost/FullPost';
 
 class Posts extends React.Component {
 
@@ -13,9 +13,9 @@ class Posts extends React.Component {
     };
 
     postSelectedHandler = (id) =>{
-        this.setState({
-            selectedPost:id
-        })
+        // poti sa folosesti si history object ca sa navighezi spre pagini:
+        this.props.history.push({pathname:'/posts/'+id})
+        // this.props.history.push('/'+id)
     }
 
     componentDidMount(){
@@ -39,7 +39,7 @@ class Posts extends React.Component {
                 posts: updatedPosts
             })
 
-            console.log(updatedPosts);
+            //console.log(updatedPosts);
         })
 
     }
@@ -48,22 +48,25 @@ class Posts extends React.Component {
 
         const posts = this.state.posts.map((post) =>{
             return (
-            <Link to={`/${post.id}`} key={post.id}>
+
+            // <Link to={`/${post.id}`} key={post.id}>
             <Post 
                 title={post.title} 
-                 
+                key={post.id}
                 match={this.props.match}
                 author={post.author} 
                 clicked={()=>{this.postSelectedHandler(post.id)} } />
-            </Link>)
+            //</Link>)
+            )
         })
 
         return (
-
+            <div>
             <section className="Posts">
                     {posts}
             </section>
-
+            <Route path={this.props.match.url + '/:id'} exact component={FullPost} />
+            </div>
         )
     }
 }
