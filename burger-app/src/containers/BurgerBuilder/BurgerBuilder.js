@@ -38,7 +38,7 @@ class BurgerBuilder extends Component {
         // aduni valorile ingredientelor :
         const sum = Object.keys(updatedIngredients).map(key =>{
             return updatedIngredients[key]
-        }) .reduce((sum,el)=>{
+        }).reduce((sum,el)=>{
             
             return sum + el
         },0)
@@ -122,30 +122,27 @@ class BurgerBuilder extends Component {
     }
 
     continuePurchase = () =>{
+
         //alert('Purchased');
-        // loading at the start of the request;
-        this.setState({loading:true});
-
-        const orderObj = {
-            ingredients : this.state.ingredients,
-            customer: {
-                name:'Nelu Soferu',
-                address:'Str. Patimilor'
-            },
-            email: 'nelu-boss@yahoo.com',
-            price: this.state.price.toFixed(2),
-            delivery:'fast'
-        };
-
-        axios.post('/orders.json',orderObj)
-        .then(response=>this.setState({loading:false,purchasing:false}))
-        .catch(error=>this.setState({loading:false,purchasing:false}))
+        
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        queryParams.push('price=' + this.state.price);
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
 
     }
 
 
     componentDidMount() {
-        axios.get('https://burger-app-project-3f63b.firebaseio.com/ingredients.json')
+        
+        console.log(this.props)
+        axios.get('/ingredients.json')
 
         .then(response=>(
             this.setState({

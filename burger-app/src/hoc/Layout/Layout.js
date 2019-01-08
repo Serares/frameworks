@@ -25,7 +25,7 @@ class Layout extends React.Component {
 render(){
 
     return(
-
+        // face drawerToggle display block cand este sub 500px ecranul si display none la navItems 
     <Aux>
     
     <Toolbar showDrawer={this.sideDrawerToggle} />

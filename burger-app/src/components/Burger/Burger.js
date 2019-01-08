@@ -21,7 +21,7 @@ const burger =(props) =>{
 },[])
 ;
 // la final dupa ce face un array cu arrayrui ,pentru a le verifica length in functie de care vei returna respectivul numar de ingrediente, ii faci reduce ca sa ai un array cu react elements.
-console.log(transformedIngredients);
+// console.log(transformedIngredients);
 
 if(transformedIngredients.length === 0){
     transformedIngredients = <p>Please insert ingredients</p>
