@@ -11,16 +11,17 @@ const reducer = (state = initialState, action)=>{
 
         case 'ADD':
         const newPerson = {
-                    id: Math.random(),
-                    name: 'Max',
-                    age: Math.floor( Math.random() * 40 )
+                    id: new Date().getTime(),
+                    name: action.personData.name,
+                    age: action.personData.age
                 }
-        const oldPersons = state.persons.slice();
-        const newArrP = oldPersons.concat(newPerson);
+                
         return {
             ...state,
-            persons:newArrP
+            persons:state.persons.concat(newPerson)
+            
         }
+        
         case 'DELETE':
 
         const oldArr = state.persons.slice();

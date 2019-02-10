@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import './AddPerson.css';
+import './AddPerson.module.css';
 
-const addPerson = (props) => (
-    <div className="AddPerson">
-        <button onClick={props.personAdded}>Add Person</button>
-    </div>
-);
+class AddPerson extends React.Component{
+    
+    state={
+        name:'',
+        age:''
+    }
 
-export default addPerson;
+
+
+    render(){
+        return( <div className="AddPerson">
+        <input type="text" name="Name" placeholder="Name"  onChange={(e)=>{this.setState({name:e.target.value})}} value={this.state.name}/>
+        <input type="text" name="Age" placeholder="Age" onChange={ (e)=>{this.setState({age:e.target.value})} } value={this.state.age}/>
+        <button onClick={()=>{this.props.personAdded(this.state.name,this.state.age)}}>Add Person</button>
+        </div>
+        )
+    }
+
+}
+
+
+export default AddPerson;

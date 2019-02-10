@@ -5,10 +5,10 @@ import Button from '../../UI/Button/Button';
 import Burger from '../../Burger/Burger';
 import classes from './CheckoutSummary.module.css';
 
-const ingredients = {
-    salad: 0,
-    bacon: "1",
-}
+// const ingredients = {
+//     salad: 0,
+//     bacon: "1",
+// }
 
 class checkoutSummary extends React.Component{
     // console.log(props.ingredients)

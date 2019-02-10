@@ -10,20 +10,17 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
-const INGREDIENT_PRICES = {
-    salad: 0.3,
-    bacon: 0.7,
-    meat: 0.6,
-    cheese: 0.2
-}
+import * as actionTypes from '../../store/actions';
+import { connect } from 'react-redux';
+
+
+
 // CONTAINER THAT HOLDS STATE
 
 class BurgerBuilder extends Component {
+
     state = {
 
-        ingredients : null,
-        price: 0,
-        purchaseble: false,
         purchasing: false,
         loading: false,
         error: false
@@ -32,7 +29,7 @@ class BurgerBuilder extends Component {
 
 
     
-
+    // pot sa ii dau ca argument this.props.ingr ca sa manageriez butonul de order disabled sau pot sa manageriez purchaseble in redux
     updatePurchase(updatedIngredients){
 
         // aduni valorile ingredientelor :
@@ -45,66 +42,66 @@ class BurgerBuilder extends Component {
         
         
 
-        this.setState({ 
-            
-            purchaseble : sum > 0
-        })
-
-    }
-
-    handleAdding = (type) =>{
-        // aici doar incrementezi valorile ingredientelor.
-
-        const oldIngredient = this.state.ingredients[type]; //este un int 
-        const newIngredient = oldIngredient + 1;
-        //console.log({...this.state.ingredients})
-        // copie a obiectului
-        const updatedIngredients = {
-            ...this.state.ingredients
-        }
-
-        updatedIngredients[type] = newIngredient; // se incrementeaza doar valorile
-
-        const oldPrice = this.state.price;
-        const newPrice = oldPrice + INGREDIENT_PRICES[type]
-
-
-
-        this.setState({
-            ingredients : updatedIngredients,
-            price: newPrice
-        })
-
-        // trebuie sa ii pasezi updatedIngredients ca sa tine evidenta in timp real la state; altefel nu se updateaza butonul cum trebuie si ramane in urma
-        this.updatePurchase(updatedIngredients);
-
-    }
-
-    handleRemoving = (type) =>{
-        // este la fel ca adding doar ca scade valorile
+        return sum > 0
         
-        const oldIngredient = this.state.ingredients[type];
-        const newIngredient = oldIngredient - 1;
-        //console.log({...this.state.ingredients})
-        const updatedIngredients = {
-            ...this.state.ingredients
-        }
-
-        updatedIngredients[type] = newIngredient;
-
-        const oldPrice = this.state.price;
-        const newPrice = oldPrice - INGREDIENT_PRICES[type]
-
-
-
-        this.setState({
-            ingredients : updatedIngredients,
-            price: newPrice
-        })
-
-        this.updatePurchase(updatedIngredients);
 
     }
+
+    // nu mai este nevoie de handlere pentru ca le folosesc in redux
+
+    // handleAdding = (type) =>{
+    //     // aici doar incrementezi valorile ingredientelor.
+
+    //     const oldIngredient = this.state.ingredients[type]; //este un int 
+    //     const newIngredient = oldIngredient + 1;
+    //     //console.log({...this.state.ingredients})
+    //     // copie a obiectului
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     }
+
+    //     updatedIngredients[type] = newIngredient; // se incrementeaza doar valorile
+
+    //     const oldPrice = this.state.price;
+    //     const newPrice = oldPrice + INGREDIENT_PRICES[type]
+
+
+
+    //     this.setState({
+    //         ingredients : updatedIngredients,
+    //         price: newPrice
+    //     })
+
+    //     // trebuie sa ii pasezi updatedIngredients ca sa tine evidenta in timp real la state; altefel nu se updateaza butonul cum trebuie si ramane in urma
+    //     this.updatePurchase(updatedIngredients);
+
+    // }
+
+    // handleRemoving = (type) =>{
+    //     // este la fel ca adding doar ca scade valorile
+        
+    //     const oldIngredient = this.state.ingredients[type];
+    //     const newIngredient = oldIngredient - 1;
+    //     //console.log({...this.state.ingredients})
+    //     const updatedIngredients = {
+    //         ...this.state.ingredients
+    //     }
+
+    //     updatedIngredients[type] = newIngredient;
+
+    //     const oldPrice = this.state.price;
+    //     const newPrice = oldPrice - INGREDIENT_PRICES[type]
+
+
+
+    //     this.setState({
+    //         ingredients : updatedIngredients,
+    //         price: newPrice
+    //     })
+
+    //     this.updatePurchase(updatedIngredients);
+
+    // }
 
 
     purchaseHandler=()=>{
@@ -124,39 +121,44 @@ class BurgerBuilder extends Component {
     continuePurchase = () =>{
 
         //alert('Purchased');
+        // nu mai este nevoie de query params cand ai redux :)
         
-        const queryParams = [];
-        for (let i in this.state.ingredients) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-        }
-        queryParams.push('price=' + this.state.price);
-        const queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-        });
+        // const queryParams = [];
+        // for (let i in this.state.ingredients) {
+        //     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        // }
+        // queryParams.push('price=' + this.state.price);
+        // const queryString = queryParams.join('&');
+        // this.props.history.push({
+        //     pathname: '/checkout',
+        //     search: '?' + queryString
+        // });
+
+        this.props.history.push('/checkout');
 
     }
 
 
     componentDidMount() {
         
-        console.log(this.props)
-        axios.get('/ingredients.json')
+        console.log(this.props);
+        // nu mai este nevoie de fetch de pe server pentru ca am datele in reducer
 
-        .then(response=>(
-            this.setState({
-                ingredients: response.data
-            })
-        ))
-        .catch(error=>this.setState({error:error}))
+        // axios.get('/ingredients.json')
+
+        // .then(response=>(
+        //     this.setState({
+        //         ingredients: response.data
+        //     })
+        // ))
+        // .catch(error=>this.setState({error:error}))
     }
 
     render() {
 
         // trimiti bool daca in ingredients sunt <= 0 ca sa fie disabled butoanele LESS
         const ingredientsCopy = {
-            ...this.state.ingredients
+            ...this.props.ingr
         }
 
         for(let key in ingredientsCopy){
@@ -169,26 +171,26 @@ class BurgerBuilder extends Component {
 
         let burger = this.state.error ? <p>Ingredients can't load</p> : <Spinner />;
 
-        if(this.state.ingredients){
+        if(this.props.ingr){
 
         burger = (
         <React.Fragment>
-        <Burger ingredients={this.state.ingredients} />
+        <Burger ingredients={this.props.ingr} />
         <BuildControls
-        addIngredient={this.handleAdding}
-        removeIngredient={this.handleRemoving} 
+        addIngredient={this.props.addedIngredient}
+        removeIngredient={this.props.removeIngredient} 
         disabled={ingredientsCopy} 
-        price={this.state.price} 
-        purchaseble={this.state.purchaseble}
+        price={this.props.pri} 
+        purchaseble={this.updatePurchase(this.props.ingr)}
         ordered={this.purchaseHandler} />
         </React.Fragment>
         );
         
         orderSummary = <OrderSummary 
-        ingredients={this.state.ingredients} 
+        ingredients={this.props.ingr} 
         cancelPurchase={this.closeModal} 
         continuePurchase={this.continuePurchase} 
-        price={this.state.price} />;
+        price={this.props.pri} />;
 
         }
 
@@ -216,7 +218,22 @@ class BurgerBuilder extends Component {
 }
 
 
+const mapStateToProps = (state) =>{
+
+    return {
+        ingr : state.ingredients,
+        pri : state.totalPrice
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        addedIngredient : (ingName) => dispatch({type:actionTypes.ADD_INGREDIENT,ingredientName:ingName}),
+        removeIngredient: (ingName) => dispatch({type:actionTypes.REMOVE_INGREDIENT,ingredientName:ingName})
+    }
+}
+ 
 
 
-
-export default withErrorHandler(BurgerBuilder,axios);
+export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(BurgerBuilder,axios));
