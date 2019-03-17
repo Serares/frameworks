@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 
 import ContactData from './ContactData/ContactData';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary'; 
+import * as actions from '../../store/actions/index';
 
 import {connect} from 'react-redux';
 
@@ -11,6 +12,7 @@ import {connect} from 'react-redux';
 class Checkout extends Component {
 
         // nu este nevoie nici de state cand ai redux
+
     // constructor(props){
     //     super(props);
 
@@ -21,6 +23,7 @@ class Checkout extends Component {
     // }
 
         // nu mai este nevoie de query aparams cand ai redux 
+        
     // componentWillMount(){
     //     // ca sa parcurgi query parameters din url poti sa folosesti si keys in loc de entries dar iti returneaza doar cheia fara valoare
     //     // folosesc +i[1] ca sa convertesti de la string la int 
@@ -44,7 +47,7 @@ class Checkout extends Component {
         
     // }
 
-    componentDidMount() {
+    componentWillMount() {
         console.log(this.props)
     }
 
@@ -57,33 +60,45 @@ class Checkout extends Component {
     }
     
     render(){
-        
-        return (
+
+        let summary = <Redirect to="/" />
+
+        if(this.props.ing){
+            const purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
+            summary = 
 
             <div>
-
+            {purchasedRedirect}
             <CheckoutSummary 
             cancelOrder={this.cancelOrder}
             continueOrder={this.continueOrder}
             ingredients={this.props.ing} />
             {/* nested route aici apare in componenta asta componenta ContactData */}
-
             <Route path={this.props.match.url + '/contact-data'} component={ContactData} />
             {/* asa trimiti props catre routed component */}
             {/* <Route path={this.props.match.url + '/contact-data'}
              render={(props)=>(<ContactData ingredients={this.state.ingredients} price={this.state.price} {...props} />)} /> */}
-
             </div>
+
+        }
         
-        )
+        return summary;
     }
 }
 
 const mapStateToProps = state=> {
     return {
-        ing: state.ingredients,
+        ing: state.burgerBuilder.ingredients,
+        purchased : state.orders.purchased
     }
 }
+
+// const mapDispatchtoProps = (dispatch) =>{
+//     return {
+
+//     }
+// }
+
 
 
 export default connect(mapStateToProps)(Checkout);

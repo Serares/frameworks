@@ -6,8 +6,10 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
 import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
 import classes from './ContactData.module.css';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 
 class ContactData extends React.Component{
 
@@ -106,11 +108,11 @@ class ContactData extends React.Component{
 
         },
 
-        loading:false,
         formIsValid:false
     }
 
     orderHandler = (e) =>{
+
         e.preventDefault();
 
         const formData = {};
@@ -119,7 +121,7 @@ class ContactData extends React.Component{
         }
 
         // loading at the start of the request;
-        this.setState({loading:true});
+        // this.setState({loading:true});
 
         const orderObj = {
             ingredients : this.props.ingr,
@@ -127,12 +129,8 @@ class ContactData extends React.Component{
             price: this.props.price
         };
 
-        axios.post('/orders.json',orderObj)
-        .then(response=>{
-            this.setState({loading:false});
-            this.props.history.push('/')
-            })
-        .catch(error=>this.setState({loading:false}))
+        this.props.burgerStart(orderObj)
+
     }
 
     checkValidity = (value, rule) =>{
@@ -198,7 +196,8 @@ class ContactData extends React.Component{
         }
 
 
-        let form = (<form onSubmit={this.orderHandler}>
+        let form = (
+        <form onSubmit={this.orderHandler}>
         
         {formElement.map(indName =>
             (
@@ -215,11 +214,12 @@ class ContactData extends React.Component{
             />
             )
         )}
+
         <Button disabled={!this.state.formIsValid} btnType="Success" clicked={this.orderHandler}> Order </Button>
 
                 </form>);
 
-            if(this.state.loading){
+            if(this.props.loading){
                 form = <Spinner />
             }
 
@@ -238,9 +238,16 @@ class ContactData extends React.Component{
 
 const mapStateToProps = state =>{
     return {
-        price : state.totalPrice,
-        ingr : state.ingredients
+        price : state.burgerBuilder.totalPrice,
+        ingr : state.burgerBuilder.ingredients,
+        loading: state.orders.loading
     }
 }
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch =>{
+    return{
+        burgerStart : (orderData) => dispatch(actions.purchaseBurger(orderData))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withErrorHandler(ContactData,axios));
