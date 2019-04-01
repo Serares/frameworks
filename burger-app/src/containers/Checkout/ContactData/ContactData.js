@@ -122,14 +122,14 @@ class ContactData extends React.Component{
 
         // loading at the start of the request;
         // this.setState({loading:true});
-
+        let priceFixed = parseFloat((this.props.price).toFixed(2))
         const orderObj = {
             ingredients : this.props.ingr,
             orderData : formData,
-            price: this.props.price
+            price: priceFixed
         };
 
-        this.props.burgerStart(orderObj)
+        this.props.burgerStart(orderObj, this.props.token);
 
     }
 
@@ -240,13 +240,14 @@ const mapStateToProps = state =>{
     return {
         price : state.burgerBuilder.totalPrice,
         ingr : state.burgerBuilder.ingredients,
-        loading: state.orders.loading
+        loading: state.orders.loading,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch =>{
     return{
-        burgerStart : (orderData) => dispatch(actions.purchaseBurger(orderData))
+        burgerStart : (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     }
 }
 

@@ -15,7 +15,7 @@ const input = (props) =>{
     let validationError = null;
     // to do sa pun style pe error message;
     if (props.invalid && props.touched) {
-    validationError = <p>Please enter a valid value! for {props.inputName}</p>;
+    validationError = <p>Please enter a valid value for {props.inputName}!</p>;
     }
 
     switch(props.elementType){

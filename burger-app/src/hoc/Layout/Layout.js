@@ -4,6 +4,8 @@ import Aux from '../AuxHoc/auxHoc';
 import Toolbar from '../../components/navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/navigation/SideDrawer/SideDrawer';
 
+import {connect} from 'react-redux';
+
 import classes from './Layout.module.css';
 // enclosing other components
 
@@ -28,8 +30,15 @@ render(){
         // face drawerToggle display block cand este sub 500px ecranul si display none la navItems 
     <Aux>
     
-    <Toolbar showDrawer={this.sideDrawerToggle} />
-    <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerToggle} />
+    <Toolbar 
+    isAuth = {this.props.isAuthenticated}
+    showDrawer={this.sideDrawerToggle} />
+
+    <SideDrawer 
+    isAuth={this.props.isAuthenticated}
+    open={this.state.showSideDrawer} 
+    closed={this.sideDrawerToggle} />
+
     <main className={classes.Layout} >
         {this.props.children}
     </main>
@@ -40,4 +49,12 @@ render(){
 
 }
 
-export default Layout;
+// verific daca userul este autentificat
+
+const mapStateToProps = state =>{
+    return {
+        isAuthenticated : state.auth.token !== null
+    }
+}
+
+export default connect(mapStateToProps)(Layout);
