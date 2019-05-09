@@ -19,7 +19,7 @@ class Orders extends Component {
     // }
     
     componentDidMount(){
-        this.props.fetchOrders(this.props.token);
+        this.props.fetchOrders(this.props.token, this.props.userId);
         // nu mai este nevoie de asta pentru ca foloses codul asta in orders action creators.
         // axios.get('/orders.json')
         // .then(res =>{
@@ -64,14 +64,15 @@ const mapStateToProps = state =>{
     return{
         orders: state.orders.orders,
         loading: state.orders.loading,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
     }
     
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
-        fetchOrders: (token)=> dispatch(actions.fetchOrders(token))
+        fetchOrders: (token,userId)=> dispatch(actions.fetchOrders(token,userId))
     }
 }
 

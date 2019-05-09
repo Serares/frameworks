@@ -4,7 +4,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     ingredients: null,
     totalPrice: 2,
-    error: false
+    error: false,
+    building:false
 }
 
 
@@ -24,15 +25,15 @@ const reducer = (state = initialState, action)=>{
 
         case(actionTypes.ADD_INGREDIENT):
         // trebuie sa copiezi si ce se afla in ingredients pentru ca doar ...state copiaza shallow interiorul si daca accesezi state.ingredients.salad o sa duca direct la original ...ingredients distribuie proprietatile
-        console.log()
-
+        
         return {
             ...state,
             ingredients:{
                 ...state.ingredients,
                 [action.ingredientName] : state.ingredients[action.ingredientName] +1
             },
-            totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+            totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+            building:true
             
         };
 
@@ -44,7 +45,8 @@ const reducer = (state = initialState, action)=>{
                 ...state.ingredients,
                 [action.ingredientName] : state.ingredients[action.ingredientName] -1
             },
-            totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+            totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+            building:true
 
         };
 
@@ -59,7 +61,8 @@ const reducer = (state = initialState, action)=>{
 
             },
             totalPrice: 0,
-            error:false
+            error:false,
+            building:false
         }
 
         case actionTypes.FETCH_INGREDIENTS_FAILED:
