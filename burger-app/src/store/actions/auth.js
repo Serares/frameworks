@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 export const authStart = () => {
-    console.log('auth')
     return ({
         type: actionTypes.AUTH_START,
 
@@ -67,7 +66,7 @@ export const auth = (email, password, isSignup) => {
         // primesc inapoi un token pe care il folosesc sa determin daca userul este logat sau nu;
         axios.post(url, authData)
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 // caluclarea expiration date:
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                 localStorage.setItem('token', response.data.idToken);
@@ -77,8 +76,8 @@ export const auth = (email, password, isSignup) => {
                 dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch(err => {
-                console.log("nu functioneaza");
-                console.log(err.response.data)
+                // console.log("nu functioneaza");
+                // console.log(err.response.data)
                 dispatch(authFail(err.response.data.error.message));
             })
     }

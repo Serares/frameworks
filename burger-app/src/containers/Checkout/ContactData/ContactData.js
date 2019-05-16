@@ -10,6 +10,8 @@ import * as actions from '../../../store/actions/index';
 
 import classes from './ContactData.module.css';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import {checkValidity} from '../../../shared/utility';
+
 
 class ContactData extends React.Component{
 
@@ -134,28 +136,6 @@ class ContactData extends React.Component{
 
     }
 
-    checkValidity = (value, rule) =>{
-
-        let isValid = true;
-
-
-        if(rule.required){
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if(rule.minLength){
-            isValid = value.length >= rule.minLength && isValid;
-        }
-
-        if(rule.maxLength){
-            isValid = value.length <= rule.maxLength && isValid;
-        }
-
-        return isValid;
-
-    }
-
-
     changedInput = (e, formElement) =>{
 
         // copiezi state 
@@ -166,7 +146,7 @@ class ContactData extends React.Component{
         }
 
         updatedElementForm.value = e.target.value;
-        updatedElementForm.valid = this.checkValidity(updatedElementForm.value, updatedElementForm.validation);
+        updatedElementForm.valid = checkValidity(updatedElementForm.value, updatedElementForm.validation);
         updatedElementForm.touched = true;
         updatedForm[formElement] = updatedElementForm;
 

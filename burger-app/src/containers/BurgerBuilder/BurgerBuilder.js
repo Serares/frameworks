@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 
 // CONTAINER THAT HOLDS STATE
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
 
     state = {
 
@@ -149,7 +149,6 @@ class BurgerBuilder extends Component {
 
     componentDidMount() {
 
-        console.log(this.props);
         // nu mai este nevoie de fetch de pe server pentru ca am datele in reducer
         // axios.get('/ingredients.json')
 

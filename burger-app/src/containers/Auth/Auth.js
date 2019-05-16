@@ -9,7 +9,7 @@ import classes from './Auth.module.css';
 
 import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
-
+import {checkValidity} from '../../shared/utility';
 
 class Auth extends Component {
 
@@ -51,27 +51,6 @@ class Auth extends Component {
 
     }
 
-    checkValidity = (value, rule) =>{
-
-        let isValid = true;
-
-
-        if(rule.required){
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if(rule.minLength){
-            isValid = value.length >= rule.minLength && isValid;
-        }
-
-        if(rule.maxLength){
-            isValid = value.length <= rule.maxLength && isValid;
-        }
-
-        return isValid;
-
-    }
-
     inputChangedHandler = (event, controlName) =>{
 
         const updatedControls = {
@@ -79,7 +58,7 @@ class Auth extends Component {
             [controlName] : {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid : this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid : checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
         }
